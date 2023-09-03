@@ -12,7 +12,7 @@ module.exports = {
 
   async getOneUser(req, res) {
     try {
-      const user = await User.findOne({ id: req.body.userId });
+      const user = await User.findOne({ _id: req.body.userId });
       res.json(user);
     } catch (error) {
       res.status(500).json(error);
