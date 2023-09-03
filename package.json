@@ -1,0 +1,20 @@
+{
+  "name": "nosql-social-network-api",
+  "version": "1.0.0",
+  "description": "An API for a social networking application using Mongoose ODM, Express.js, and Moment.js that allows users to share and react to thoughts, create and manage friends lists via a NoSQL database through MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node utils/seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^7.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
