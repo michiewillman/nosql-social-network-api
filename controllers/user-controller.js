@@ -15,7 +15,7 @@ module.exports = {
       const user = await User.findOne({ _id: req.body.userId });
 
       if (!user) {
-        return res.status(404).json({ message: 'No user found with that ID' });
+        return res.status(404).json("No user found with that ID");
       }
 
       res.json(user);
@@ -35,7 +35,15 @@ module.exports = {
 
   async updateUser(req, res) {
     try {
-      const user = await User.findOneAndUpdate(req.params.userId);
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body }
+      );
+
+      if (!user) {
+        return res.status(404).json("No user found with that ID");
+      }
+
       res.json(`User ${user} has been updated`);
     } catch (error) {
       res.status(500).json(error);
@@ -45,6 +53,11 @@ module.exports = {
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndRemove(req.params.userId);
+
+      if (!user) {
+        return res.status(404).json("No user found with that ID");
+      }
+
       res.json(`User has been deleted`);
     } catch (error) {
       res.status(500).json(error);
