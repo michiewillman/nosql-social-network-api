@@ -1,6 +1,6 @@
-const thoughtSchema = new mongoose.Schema(
+const sliceSchema = new mongoose.Schema(
   {
-    thoughtText: {
+    sliceText: {
       type: String,
       required: true,
       minLength: [1, "Text required"],
@@ -14,7 +14,7 @@ const thoughtSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reactions: [{ type: Schema.Types.ObjectId, ref: "reaction" }],
+    bites: [{ type: Schema.Types.ObjectId, ref: "bite" }],
   },
   {
     toJSON: {
@@ -24,11 +24,11 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-thoughtSchema.virtual("reactionCount").get(function () {
-  return `This thought has ${this.reactions.length} reactions.`;
+sliceSchema.virtual("biteCount").get(function () {
+  return `This slice has ${this.bites.length} bites.`;
 });
 
 // Initialize the User model
-const Thought = model("thought", thoughtSchema);
+const Slice = model("slice", sliceSchema);
 
-module.exports = Thought;
+module.exports = Slice;

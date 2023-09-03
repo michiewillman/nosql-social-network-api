@@ -1,10 +1,10 @@
-const reactionSchema = new mongoose.Schema({
-  reactionId: {
+const biteSchema = new mongoose.Schema({
+  biteId: {
     type: Schema.Types.ObjectId,
     // set to a new id on default
     default: () => new Types.ObjectId(),
   },
-  reactionBody: {
+  biteBody: {
     type: String,
     required: true,
     maxLength: [280, "Cannot be more than 280 characters"],
@@ -20,4 +20,4 @@ const reactionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = reactionSchema;
+module.exports = biteSchema;

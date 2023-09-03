@@ -1,5 +1,3 @@
-const { URLSearchParams } = require("url");
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -14,7 +12,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       match: [/.+@.+\..+/, "Must be a valid email address"],
     },
-    thoughts: [{ type: Schema.Types.ObjectId, ref: "thought" }],
+    slices: [{ type: Schema.Types.ObjectId, ref: "slice" }],
     friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
   },
   {
