@@ -1,3 +1,5 @@
+const { URLSearchParams } = require("url");
+
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -27,3 +29,8 @@ const userSchema = new mongoose.Schema(
 userSchema.virtual("friendCount").get(function () {
   return `This user has ${this.friends.length} friends.`;
 });
+
+// Initialize the User model
+const User = model("user", userSchema);
+
+module.exports = User;

@@ -27,3 +27,8 @@ const thoughtSchema = new mongoose.Schema(
 thoughtSchema.virtual("reactionCount").get(function () {
   return `This thought has ${this.reactions.length} reactions.`;
 });
+
+// Initialize the User model
+const Thought = model("thought", thoughtSchema);
+
+module.exports = Thought;

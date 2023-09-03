@@ -1,4 +1,4 @@
-const reaction = new mongoose.Schema({
+const reactionSchema = new mongoose.Schema({
   reactionId: {
     type: Schema.Types.ObjectId,
     // set to a new id on default
@@ -19,3 +19,5 @@ const reaction = new mongoose.Schema({
     get: (timestamp) => formatDate(timestamp),
   },
 });
+
+module.exports = reactionSchema;
