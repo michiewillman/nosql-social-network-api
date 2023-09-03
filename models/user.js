@@ -1,20 +1,29 @@
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, "Must be a valid email address"],
+    },
+    thoughts: [{ type: Schema.Types.ObjectId, ref: "thought" }],
+    friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  thoughts: [{ type: Schema.Types.ObjectId, ref: "thought" }],
-  friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
+  }
+);
 
 // Friend count of a user generated on-demand
 userSchema.virtual("friendCount").get(function () {
-  return this.friends.length;
+  return `This user has ${this.friends.length} friends.`;
 });

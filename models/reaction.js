@@ -1,8 +1,13 @@
 const reaction = new mongoose.Schema({
-  reactionId: Schema.Types.ObjectId,
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    // set to a new id on default
+    default: () => new Types.ObjectId(),
+  },
   reactionBody: {
     type: String,
     required: true,
+    maxLength: [280, "Cannot be more than 280 characters"],
   },
   username: {
     type: String,
@@ -11,5 +16,6 @@ const reaction = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+    get: (timestamp) => formatDate(timestamp),
   },
 });
