@@ -4,14 +4,9 @@ const router = require("express").Router();
 
 // /api/users
 // GET
-router.route("/").get(getUsers).post(createUser);
+router.route("/").get(getAllUsers).post(createUser);
 
 // /api/users/:userId
+router.route("/:userId").get(getOneUser).put(updateUser).delete(deleteUser);
 
-// GET
-
-// POST
-
-// PUT
-
-// DELETE
+module.exports = router;
