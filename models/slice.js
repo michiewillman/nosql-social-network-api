@@ -1,3 +1,5 @@
+const { Schema, model } = require('mongoose');
+
 const sliceSchema = new mongoose.Schema(
   {
     sliceText: {
