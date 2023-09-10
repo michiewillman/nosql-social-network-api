@@ -1,6 +1,6 @@
-const User = require("../models/user");
+const User = require("../models");
 
-module.exports = {
+const userController = {
   async getAllUsers(req, res) {
     try {
       const users = await User.find();
@@ -37,7 +37,8 @@ module.exports = {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $set: req.body }
+        { $set: req.body },
+        { runValidators: true }
       );
 
       if (!user) {
@@ -64,3 +65,5 @@ module.exports = {
     }
   },
 };
+
+module.exports = userController;

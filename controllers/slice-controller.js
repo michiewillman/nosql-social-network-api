@@ -37,7 +37,8 @@ module.exports = {
     try {
       const slice = await Slice.findOneAndUpdate(
         { _id: req.params.sliceId },
-        { $set: req.body }
+        { $set: req.body },
+        { runValidators: true }
       );
 
       if (!slice) {
