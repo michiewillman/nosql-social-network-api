@@ -27,7 +27,12 @@ const sliceController = {
   async createSlice(req, res) {
     try {
       const newSlice = await Slice.create(req.body);
-      res.json(`Slice has been created`);
+      const userUpdate = await User.findOneAndUpdate(
+        { _id: req.body.username },
+        { $push: { slices: newSlice._id } }
+      );
+      console.log(req.body);
+      res.json(newSlice);
     } catch (error) {
       res.status(500).json(error);
     }

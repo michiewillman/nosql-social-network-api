@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const biteSchema = require("./bite");
 
 const sliceSchema = new Schema(
   {
@@ -16,7 +17,13 @@ const sliceSchema = new Schema(
       type: String,
       required: true,
     },
-    bites: [{ type: Schema.Types.ObjectId, ref: "bite" }],
+    bites: [
+      biteSchema,
+      // {
+      //   type: Schema.Types.ObjectId,
+      //   ref: "Bite"
+      // }
+    ],
   },
   {
     toJSON: {
@@ -31,6 +38,6 @@ sliceSchema.virtual("biteCount").get(function () {
 });
 
 // Initialize the User model
-const Slice = model("slice", sliceSchema);
+const Slice = model("Slice", sliceSchema);
 
 module.exports = Slice;
