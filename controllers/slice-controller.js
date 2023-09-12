@@ -66,9 +66,41 @@ const sliceController = {
   },
 
   // Add/Create reaction(bite) to a slice
-  async createBite(req, res) {},
+  async createBite(req, res) {
+    try {
+      const bite = Slice.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
+        { runValidators: true, new: true }
+      );
+
+      if (!dbThoughtData) {
+        return res.status(404).json({ message: "No thought with this id!" });
+      }
+
+      res.json(dbThoughtData);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   // Delete a bite from a slice
-  async deleteBite(req, res) {},
+  async deleteBite(req, res) {
+    try {
+      const bite = Slice.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { runValidators: true, new: true }
+      );
+
+      if (!dbThoughtData) {
+        return res.status(404).json({ message: "No thought with this id!" });
+      }
+
+      res.json(dbThoughtData);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = sliceController;
