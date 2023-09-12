@@ -26,3 +26,5 @@ router
   .get(getOneSlice)
   .post(createBite)
   .delete(deleteBite);
+
+module.exports = router;
