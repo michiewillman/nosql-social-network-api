@@ -1,6 +1,6 @@
 const { Schema, Types } = require("mongoose");
 
-const biteSchema = new mongoose.Schema(
+const biteSchema = new Schema(
   {
     biteId: {
       type: Schema.Types.ObjectId,

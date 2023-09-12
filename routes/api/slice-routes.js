@@ -5,6 +5,8 @@ const {
   createSlice,
   updateSlice,
   deleteSlice,
+  createBite,
+  deleteBite,
 } = require("../../controllers/slice-controller");
 
 // /api/slices

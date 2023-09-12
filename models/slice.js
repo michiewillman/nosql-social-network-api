@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const sliceSchema = new mongoose.Schema(
+const sliceSchema = new Schema(
   {
     sliceText: {
       type: String,

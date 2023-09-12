@@ -64,6 +64,11 @@ const sliceController = {
       res.status(500).json(error);
     }
   },
+
+  // Add/Create reaction(bite) to a slice
+  async createBite(req, res) {},
+  // Delete a bite from a slice
+  async deleteBite(req, res) {},
 };
 
 module.exports = sliceController;
