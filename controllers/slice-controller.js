@@ -1,6 +1,6 @@
 const { Slice } = require("../models");
 
-module.exports = {
+const sliceController = {
   async getAllSlices(req, res) {
     try {
       const slices = await Slice.find();
@@ -65,3 +65,5 @@ module.exports = {
     }
   },
 };
+
+module.exports = sliceController;
