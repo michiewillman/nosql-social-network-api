@@ -12,10 +12,11 @@ const userController = {
 
   async getOneUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.body.userId })
-        .select("-__v")
-        .populate("friends")
-        .populate("slices");
+      const user = await User.findOne({ _id: req.params.userId }).select(
+        "-__v"
+      );
+      // .populate("slices")
+      // .populate("friends");
 
       if (!user) {
         return res.status(404).json("No user found with that ID");

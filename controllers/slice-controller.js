@@ -37,7 +37,7 @@ const sliceController = {
         return res.status(404).json({ message: "No user found with this id" });
       }
 
-      res.json("Slice was created");
+      res.json(newSlice);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -55,7 +55,7 @@ const sliceController = {
         return res.status(400).json("No slice found with that id");
       }
 
-      res.json(`Slice has been updated.`);
+      res.json(slice);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -79,7 +79,7 @@ const sliceController = {
         return res.status(404).json({ message: "No user found with this id" });
       }
 
-      res.json(`Slice has been successfully deleted.`);
+      res.json(`Slice has been deleted.`);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -98,7 +98,7 @@ const sliceController = {
         return res.status(400).json("No slice found with that id");
       }
 
-      res.json(dbThoughtData);
+      res.json(slice);
     } catch (error) {
       res.status(500).json(error);
     }
