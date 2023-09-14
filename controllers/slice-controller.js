@@ -37,7 +37,7 @@ const sliceController = {
       res.status(500).json(error);
     }
   },
-
+ 
   async updateSlice(req, res) {
     try {
       const slice = await Slice.findOneAndUpdate(
