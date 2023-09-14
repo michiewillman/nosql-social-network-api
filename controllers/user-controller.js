@@ -12,7 +12,10 @@ const userController = {
 
   async getOneUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.body.userId });
+      const user = await User.findOne({ _id: req.body.userId })
+        .select("-__v")
+        .populate("friends")
+        .populate("slices");
 
       if (!user) {
         return res.status(404).json("No user found with that ID");
@@ -53,13 +56,51 @@ const userController = {
 
   async deleteUser(req, res) {
     try {
-      const user = await User.findOneAndRemove(req.params.userId);
+      const user = await User.findOneAndDelete({ _id: req.params.userId });
 
       if (!user) {
         return res.status(404).json("No user found with that ID");
       }
 
       res.json(`User has been deleted`);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // Add friend to user "friends" array property
+  async addFriend(req, res) {
+    try {
+      const user = User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.params.friendId } },
+        { new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json("No user found with that ID");
+      }
+
+      res.json(user);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // Remove friend from user "friends" array property
+  async removeFriend(req, res) {
+    try {
+      const user = User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendId } },
+        { new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json("No user found with that ID");
+      }
+
+      res.json(`User has been removed from friends list.`);
     } catch (error) {
       res.status(500).json(error);
     }
