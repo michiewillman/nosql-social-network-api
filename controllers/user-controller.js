@@ -71,7 +71,7 @@ const userController = {
   // Add friend to user "friends" array property
   async addFriend(req, res) {
     try {
-      const user = User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $addToSet: { friends: req.params.friendId } },
         { new: true }
@@ -90,7 +90,7 @@ const userController = {
   // Remove friend from user "friends" array property
   async removeFriend(req, res) {
     try {
-      const user = User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
         { new: true }
