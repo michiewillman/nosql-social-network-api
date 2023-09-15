@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const biteSchema = require("./bite");
+const formatDate = require("../utils/formatDate");
 
 const sliceSchema = new Schema(
   {
@@ -12,6 +13,7 @@ const sliceSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (timestamp) => formatDate(timestamp),
     },
     username: {
       type: String,
