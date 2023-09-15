@@ -19,13 +19,7 @@ const sliceSchema = new Schema(
       type: String,
       required: true,
     },
-    bites: [
-      biteSchema,
-      // {
-      //   type: Schema.Types.ObjectId,
-      //   ref: "Bite"
-      // }
-    ],
+    bites: [biteSchema],
   },
   {
     toJSON: {
