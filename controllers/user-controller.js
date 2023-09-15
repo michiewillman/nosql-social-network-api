@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Slice } = require("../models");
 
 const userController = {
   async getAllUsers(req, res) {
@@ -12,11 +12,10 @@ const userController = {
 
   async getOneUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId }).select(
-        "-__v"
-      );
-      // .populate("slices")
-      // .populate("friends");
+      const user = await User.findOne({ _id: req.params.userId })
+        .select("-__v")
+        .populate("slices")
+        .populate("friends");
 
       if (!user) {
         return res.status(404).json("No user found with that ID");
@@ -49,7 +48,7 @@ const userController = {
         return res.status(404).json("No user found with that ID");
       }
 
-      res.json(`User ${user} has been updated`);
+      res.json(user);
     } catch (error) {
       res.status(500).json(error);
     }

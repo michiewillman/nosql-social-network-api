@@ -14,8 +14,8 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, "Must be a valid email address"],
     },
-    slices: [{ type: Schema.Types.ObjectId, ref: "slice" }],
-    friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
+    slices: [{ type: Schema.Types.ObjectId, ref: "Slice" }],
+    friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   {
     toJSON: {
