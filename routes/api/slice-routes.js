@@ -21,10 +21,9 @@ router
   .delete(deleteSlice);
 
 // /api/slices/:sliceId/bites
-router
-  .route("/:sliceId/bites")
-  .get(getOneSlice)
-  .post(createBite)
-  .delete(deleteBite);
+router.route("/:sliceId/bites").post(createBite);
+
+// /api/slices/:sliceId/bites/:biteId
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteBite);
 
 module.exports = router;
