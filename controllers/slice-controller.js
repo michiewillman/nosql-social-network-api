@@ -9,7 +9,6 @@ const sliceController = {
         .populate("bites");
       res.json(slices);
     } catch (error) {
-      console.log(error);
       res.status(500).json(error);
     }
   },
@@ -22,7 +21,6 @@ const sliceController = {
         return res.status(400).json("No slice found with that id");
       }
 
-      console.log(slice);
       res.json(slice);
     } catch (error) {
       res.status(500).json(error);
