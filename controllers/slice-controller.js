@@ -3,9 +3,13 @@ const { Slice } = require("../models");
 const sliceController = {
   async getAllSlices(req, res) {
     try {
-      const slices = await Slice.find().sort({ createdAt: -1 });
+      const slices = await Slice.find()
+        .sort({ createdAt: -1 })
+        .select("-__v")
+        .populate("bites");
       res.json(slices);
     } catch (error) {
+      console.log(error);
       res.status(500).json(error);
     }
   },
@@ -18,6 +22,7 @@ const sliceController = {
         return res.status(400).json("No slice found with that id");
       }
 
+      console.log(slice);
       res.json(slice);
     } catch (error) {
       res.status(500).json(error);
