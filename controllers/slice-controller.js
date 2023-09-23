@@ -31,17 +31,17 @@ const sliceController = {
 
   async createSlice(req, res) {
     try {
-      const newSlice = await Slice.create(req.body);
-      const userUpdate = await User.findOneAndUpdate(
-        { _id: req.body.username },
+      const newSlice = await Slice.create(req.body).select("-__v");
+      const user = await User.findOneAndUpdate(
+        { _id: req.body.userId },
         { $push: { slices: newSlice._id } },
         { new: true }
-      ).select("-__v");
-
-      if (!userUpdate) {
+      );
+      console.log(user);
+      if (!user) {
         return res.status(404).json({ message: "No user found with this id" });
       }
-      console.log(newSlice);
+
       res.json(newSlice);
     } catch (error) {
       res.status(500).json(error);
@@ -69,11 +69,6 @@ const sliceController = {
   async deleteSlice(req, res) {
     try {
       const slice = await Slice.findOneAndRemove({ _id: req.params.sliceId });
-
-      if (!slice) {
-        return res.status(400).json("No slice found with that id");
-      }
-
       const userUpdate = await User.findOneAndUpdate(
         { slices: req.params.sliceId },
         { $pull: { slices: req.params.sliceId } },
