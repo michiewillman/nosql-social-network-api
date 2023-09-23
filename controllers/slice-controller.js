@@ -1,4 +1,4 @@
-const { Slice } = require("../models");
+const { Slice, User } = require("../models");
 
 const sliceController = {
   async getAllSlices(req, res) {
@@ -15,7 +15,9 @@ const sliceController = {
 
   async getOneSlice(req, res) {
     try {
-      const slice = await Slice.findOne({ _id: req.params.sliceId });
+      const slice = await Slice.findOne({ _id: req.params.sliceId }).select(
+        "-__v"
+      );
 
       if (!slice) {
         return res.status(400).json("No slice found with that id");
@@ -34,12 +36,12 @@ const sliceController = {
         { _id: req.body.username },
         { $push: { slices: newSlice._id } },
         { new: true }
-      );
+      ).select("-__v");
 
       if (!userUpdate) {
         return res.status(404).json({ message: "No user found with this id" });
       }
-
+      console.log(newSlice);
       res.json(newSlice);
     } catch (error) {
       res.status(500).json(error);
@@ -52,7 +54,7 @@ const sliceController = {
         { _id: req.params.sliceId },
         { $set: req.body },
         { runValidators: true }
-      );
+      ).select("-__v");
 
       if (!slice) {
         return res.status(400).json("No slice found with that id");
