@@ -88,9 +88,9 @@ const sliceController = {
   // Add/Create reaction(bite) to a slice
   async createBite(req, res) {
     try {
-      const slice = Slice.findOneAndUpdate(
+      const slice = await Slice.findOneAndUpdate(
         { _id: req.params.sliceId },
-        { $addToSet: { reactions: req.body } },
+        { $addToSet: { bites: req.body } },
         { runValidators: true, new: true }
       );
 
@@ -106,9 +106,9 @@ const sliceController = {
   // Delete a bite from a slice
   async deleteBite(req, res) {
     try {
-      const slice = Slice.findOneAndUpdate(
+      const slice = await Slice.findOneAndUpdate(
         { _id: req.params.sliceId },
-        { $pull: { reactions: { reactionId: req.params.biteId } } },
+        { $pull: { bites: { biteId: req.params.biteId } } },
         { runValidators: true, new: true }
       );
 

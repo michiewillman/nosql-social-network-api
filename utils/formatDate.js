@@ -51,7 +51,6 @@ module.exports = (
   const minutes = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
   const amOrPm = date.getHours() >= 12 ? "pm" : "am";
 
-  // Object for our new formatted timestamp
   const newTimeStamp = `${formattedMonth} ${day}, ${year} at ${hour}:${minutes} ${amOrPm}`;
 
   return newTimeStamp;
