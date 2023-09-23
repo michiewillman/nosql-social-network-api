@@ -31,19 +31,20 @@ const sliceController = {
 
   async createSlice(req, res) {
     try {
-      const newSlice = await Slice.create(req.body).select("-__v");
+      const newSlice = await Slice.create(req.body);
       const user = await User.findOneAndUpdate(
         { _id: req.body.userId },
         { $push: { slices: newSlice._id } },
         { new: true }
       );
-      console.log(user);
+
       if (!user) {
         return res.status(404).json({ message: "No user found with this id" });
       }
 
       res.json(newSlice);
     } catch (error) {
+      console.log(error);
       res.status(500).json(error);
     }
   },
